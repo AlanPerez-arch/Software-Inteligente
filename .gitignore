@@ -1,2 +1,6 @@
+# ignorar archivos de entorno y otros archivos que no deberían ser compartidos
 venve
 readme.md
+
+# ignorar el archivo .env que contiene la clave de la API
+.env
