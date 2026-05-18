@@ -29,8 +29,6 @@ def login_requerido():
 @app.route("/")
 def inicio():
 
-    if not login_requerido():
-        return redirect(url_for("login"))
 
     return render_template("index.html")
 
@@ -84,12 +82,12 @@ def login():
 # LOGOUT
 # ======================================================
 
-@app.route("/logout")
+@app.route("/index")
 def logout():
 
     session.clear()
 
-    return redirect(url_for("login"))
+    return redirect(url_for("index"))
 
 # ======================================================
 # DASHBOARD
@@ -158,8 +156,6 @@ def dashboard():
 @app.route("/historial")
 def historial():
 
-    if not login_requerido():
-        return redirect(url_for("login"))
 
     proyectos = [
 
@@ -216,16 +212,6 @@ def historial():
 @app.route("/formulario", methods=["GET", "POST"])
 def formulario():
 
-    if not login_requerido():
-        return redirect(url_for("login"))
-
-    if request.method == "POST":
-
-        session["es_nuevo"] = False
-
-        flash("Tu proyecto fue enviado correctamente.", "success")
-
-        return redirect(url_for("dashboard"))
 
     return render_template("formulario.html")
 

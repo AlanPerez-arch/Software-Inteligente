@@ -1120,9 +1120,9 @@ body{
     1px solid var(--card-border);
 
     background:
-    rgba(255,255,255,0.04);
+    rgba(13, 13, 13, 0.04);
 
-    color: var(--text-main);
+    color:#050816;
 
     outline: none;
 
@@ -2950,4 +2950,924 @@ label{
     .form-layout .col-lg-7 {
         margin-left: 0;
     }
+}
+
+/* Área de preguntas del formulario */
+.generator-card {
+    background: #f0fdf9 !important;
+    color: #000000 !important;
+}
+
+/* Títulos y textos dentro del formulario */
+.generator-card h1,
+.generator-card h2,
+.generator-card h3,
+.generator-card p,
+.generator-card label,
+.generator-card span {
+    color: #000000 !important;
+}
+
+/* Campos de texto */
+.generator-card .input-premium,
+.generator-card .textarea-premium,
+.generator-card select {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #b7e4d8 !important;
+}
+
+/* Placeholder */
+.generator-card .input-premium::placeholder,
+.generator-card .textarea-premium::placeholder {
+    color: #555555 !important;
+}
+
+/* Checkboxes */
+.generator-card .checkbox-grid label {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #b7e4d8 !important;
+}
+
+/* Caja informativa */
+.generator-card .ai-info-box {
+    background: #d9fbe8 !important;
+    color: #000000 !important;
+}
+
+.generator-card .ai-info-box p {
+    color: #000000 !important;
+}
+
+/* =========================
+   PLANT BLOOM ANIMATION
+========================= */
+
+.plant-animation-card {
+    width: 100%;
+    max-width: 560px;
+    min-height: 430px;
+    margin-top: 35px;
+    border-radius: 34px;
+    position: relative;
+    overflow: hidden;
+    padding: 35px;
+    background:
+        radial-gradient(circle at top left, rgba(66, 211, 146, 0.26), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.23), transparent 38%),
+        rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(59, 130, 246, 0.14);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.09);
+    backdrop-filter: blur(18px);
+}
+
+.plant-scene {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+.sun-glow {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    right: 40px;
+    top: 35px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(66, 211, 146, 0.38), rgba(59, 130, 246, 0.16), transparent 70%);
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+}
+
+.soil {
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    width: 310px;
+    height: 76px;
+    transform: translateX(-50%);
+}
+
+.soil-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5e34, #5b371f);
+    box-shadow: inset 0 -8px 18px rgba(0,0,0,0.22);
+    animation: soilAppear 1s ease forwards;
+}
+
+@keyframes soilAppear {
+    from {
+        transform: scaleX(0.2);
+        opacity: 0;
+    }
+
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.soil-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(91, 55, 31, 0.55);
+    border-radius: 50%;
+    bottom: 28px;
+    animation: dotFloat 3s ease-in-out infinite;
+}
+
+.dot-1 {
+    left: 50px;
+}
+
+.dot-2 {
+    left: 150px;
+    width: 9px;
+    height: 9px;
+    animation-delay: 0.7s;
+}
+
+.dot-3 {
+    right: 58px;
+    animation-delay: 1.2s;
+}
+
+@keyframes dotFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.seed {
+    position: absolute;
+    left: 50%;
+    bottom: 74px;
+    width: 24px;
+    height: 18px;
+    transform: translateX(-50%) scale(0);
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(135deg, #a16207, #facc15);
+    animation: seedPop 0.8s ease forwards 0.6s;
+}
+
+@keyframes seedPop {
+    0% {
+        transform: translateX(-50%) translateY(20px) scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: translateX(-50%) translateY(-4px) scale(1.15);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.stem {
+    position: absolute;
+    left: 50%;
+    bottom: 82px;
+    width: 12px;
+    height: 0;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+    transform-origin: bottom;
+    animation: growStem 1.7s ease forwards 1.2s, stemSway 3s ease-in-out infinite 3s;
+}
+
+@keyframes growStem {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 135px;
+    }
+}
+
+@keyframes stemSway {
+    0%, 100% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(2deg);
+    }
+}
+
+.leaf {
+    position: absolute;
+    left: 50%;
+    bottom: 165px;
+    width: 75px;
+    height: 42px;
+    background: linear-gradient(135deg, #42d392, #16a34a);
+    opacity: 0;
+    transform-origin: left center;
+    box-shadow: 0 12px 22px rgba(34, 197, 94, 0.22);
+}
+
+.leaf-left {
+    border-radius: 80% 20% 80% 20%;
+    transform: translateX(-10px) rotate(170deg) scale(0);
+    animation: leafLeftGrow 1s ease forwards 2.1s;
+}
+
+.leaf-right {
+    border-radius: 20% 80% 20% 80%;
+    transform: translateX(10px) rotate(10deg) scale(0);
+    animation: leafRightGrow 1s ease forwards 2.35s;
+}
+
+@keyframes leafLeftGrow {
+    to {
+        opacity: 1;
+        transform: translateX(-70px) rotate(155deg) scale(1);
+    }
+}
+
+@keyframes leafRightGrow {
+    to {
+        opacity: 1;
+        transform: translateX(8px) rotate(18deg) scale(1);
+    }
+}
+
+.bloom {
+    position: absolute;
+    left: 50%;
+    bottom: 220px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50% 50% 45% 45%;
+    opacity: 0;
+    background: linear-gradient(135deg, #38bdf8, #42d392);
+    transform: translateX(-50%) scale(0);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.25);
+}
+
+.bloom-1 {
+    animation: flowerPop 0.8s ease forwards 3s;
+}
+
+.bloom-2 {
+    bottom: 228px;
+    transform-origin: bottom center;
+    background: linear-gradient(135deg, #60a5fa, #38bdf8);
+    animation: flowerPetalLeft 0.8s ease forwards 3.15s;
+}
+
+.bloom-3 {
+    bottom: 228px;
+    background: linear-gradient(135deg, #42d392, #86efac);
+    animation: flowerPetalRight 0.8s ease forwards 3.3s;
+}
+
+@keyframes flowerPop {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+@keyframes flowerPetalLeft {
+    to {
+        opacity: 1;
+        transform: translateX(-82%) translateY(-8px) rotate(-35deg) scale(1);
+    }
+}
+
+@keyframes flowerPetalRight {
+    to {
+        opacity: 1;
+        transform: translateX(-18%) translateY(-8px) rotate(35deg) scale(1);
+    }
+}
+
+.sparkle {
+    position: absolute;
+    color: #3b82f6;
+    opacity: 0;
+    filter: drop-shadow(0 8px 14px rgba(59, 130, 246, 0.28));
+    animation: sparkleFloat 2.8s ease-in-out infinite;
+}
+
+.sparkle-1 {
+    left: 30%;
+    top: 38%;
+    font-size: 1.4rem;
+    animation-delay: 3.7s;
+}
+
+.sparkle-2 {
+    right: 28%;
+    top: 30%;
+    color: #42d392;
+    font-size: 1rem;
+    animation-delay: 4s;
+}
+
+.sparkle-3 {
+    right: 36%;
+    bottom: 32%;
+    color: #16a34a;
+    font-size: 1.2rem;
+    animation-delay: 4.3s;
+}
+
+@keyframes sparkleFloat {
+    0% {
+        transform: translateY(12px) scale(0.7);
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-30px) scale(1.1);
+        opacity: 0;
+    }
+}
+
+.plant-caption {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.plant-caption h4 {
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.plant-caption p {
+    color: #475569;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* DARK MODE */
+.dark-mode .plant-animation-card {
+    background:
+        radial-gradient(circle at top left, rgba(66, 211, 146, 0.16), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.17), transparent 38%),
+        rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.dark-mode .plant-caption h4 {
+    color: #f8fafc;
+}
+
+.dark-mode .plant-caption p {
+    color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+    .plant-animation-card {
+        min-height: 360px;
+        padding: 25px;
+    }
+
+    .plant-scene {
+        height: 250px;
+    }
+
+    .soil {
+        width: 240px;
+    }
+}
+
+/* =========================
+   BLOOM SVG LOGIN ANIMATION
+========================= */
+
+.bloom-animation-card {
+    width: 100%;
+    max-width: 560px;
+    min-height: 430px;
+    margin-top: 35px;
+    border-radius: 34px;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffffff, #eff6ff, #ecfdf5);
+    border: 1px solid rgba(59, 130, 246, 0.18);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.10);
+    overflow: hidden;
+}
+
+.bloom-svg {
+    width: 100%;
+    height: 300px;
+}
+
+.ground {
+    fill: #9a6b3f;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.stem-svg {
+    fill: none;
+    stroke: #22c55e;
+    stroke-width: 14;
+    stroke-linecap: round;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: drawStemLoop 7s ease-in-out infinite;
+}
+
+.leaf-svg {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.leaf-svg-left {
+    fill: #42d392;
+    animation: popLeaf 0.8s ease forwards 1.8s;
+}
+
+.leaf-svg-right {
+    fill: #16a34a;
+    animation: popLeaf 0.8s ease forwards 2s;
+}
+
+.flower-center {
+    fill: #b8f63b;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: popFlower 0.6s ease forwards 2.8s;
+}
+
+.petal {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: popFlower 0.65s ease forwards;
+}
+
+.petal-1 {
+    fill: #60a5fa;
+    animation-delay: 3s;
+}
+
+.petal-2 {
+    fill: #38bdf8;
+    animation-delay: 3.1s;
+}
+
+.petal-3 {
+    fill: #458be7;
+    animation-delay: 3.2s;
+}
+
+.petal-4 {
+    fill: #8f96f0;
+    animation-delay: 3.3s;
+}
+
+.petal-5 {
+    fill: #458be7;
+    animation-delay: 3.2s;
+}
+
+.petal-6 {
+    fill: #8f96f0;
+    animation-delay: 3.3s;
+}
+.petal-7 {
+    fill: #d070f3;
+    animation-delay: 3.3s;
+}
+.petal-8 {
+    fill: #c39de9;
+    animation-delay: 3.3s;
+}
+.petal-9 {
+    fill: #f37be9;
+    animation-delay: 3.3s;
+}
+.petal-10 {
+    fill: #bc6ed6;
+    animation-delay: 3.3s;
+}
+.petal-11 {
+    fill: #8754ed;
+    animation-delay: 3.3s;
+}
+.petal-12 {
+    fill: #8f96f0;
+    animation-delay: 3.3s;
+}
+.petal-13 {
+    fill: #4652fa;
+    animation-delay: 3.3s;
+}
+.petal-14 {
+    fill: #4652fa;
+    animation-delay: 3.3s;
+}
+.petal-15 {
+    fill: #4652fa;
+    animation-delay: 3.3s;
+}
+
+.spark {
+    fill: #3b82f6;
+    opacity: 0;
+    animation: sparkleNice 2.4s ease-in-out infinite;
+}
+
+.spark-1 {
+    animation-delay: 3.6s;
+}
+
+.spark-2 {
+    fill: #42d392;
+    animation-delay: 3.9s;
+}
+
+.spark-3 {
+    fill: #22c55e;
+    animation-delay: 4.2s;
+}
+
+@keyframes drawStem {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes popLeaf {
+    0% {
+        opacity: 0;
+        transform: scale(0.2) rotate(-10deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.08) rotate(2deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes popFlower {
+    0% {
+        opacity: 0;
+        transform: scale(0.15);
+    }
+
+    75% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes sparkleNice {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.6);
+    }
+
+    45% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.plant-caption {
+    text-align: center;
+}
+
+.plant-caption h4 {
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.plant-caption p {
+    color: #475569;
+    margin: 0;
+    font-weight: 600;
+}
+
+.dark-mode .bloom-animation-card {
+    background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(5,46,43,0.8));
+    border-color: rgba(255,255,255,0.09);
+}
+
+.dark-mode .plant-caption h4 {
+    color: #f8fafc;
+}
+
+.dark-mode .plant-caption p {
+    color: #cbd5e1;
+}
+
+/* =========================
+   BLOOM LOGIN SVG LOOP
+========================= */
+
+.bloom-animation-card {
+    width: 100%;
+    max-width: 560px;
+    min-height: 430px;
+    margin-top: 35px;
+    border-radius: 34px;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffffff, #eff6ff, #ecfdf5);
+    border: 1px solid rgba(59, 130, 246, 0.18);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.10);
+    overflow: hidden;
+}
+
+.bloom-svg {
+    width: 100%;
+    height: 300px;
+}
+
+.ground {
+    fill: #9a6b3f;
+    opacity: 0;
+    animation: groundLoop 8s ease-in-out infinite;
+}
+
+.stem-svg {
+    fill: none;
+    stroke: #22c55e;
+    stroke-width: 14;
+    stroke-linecap: round;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: drawStemLoop 8s ease-in-out infinite;
+}
+
+.leaf-svg {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: popLeafLoop 8s ease-in-out infinite;
+}
+
+.leaf-svg-left {
+    fill: #42d392;
+    animation-delay: 0.8s;
+}
+
+.leaf-svg-right {
+    fill: #16a34a;
+    animation-delay: 1s;
+}
+
+.flower-center {
+    fill: #c3eb25;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: flowerCenterLoop 8s ease-in-out infinite;
+}
+
+.petal {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: popFlowerLoop 8s ease-in-out infinite;
+}
+
+.petal-1  { fill: #60a5fa; animation-delay: 2.00s; }
+.petal-2  { fill: #38bdf8; animation-delay: 2.06s; }
+.petal-3  { fill: #93c5fd; animation-delay: 2.12s; }
+.petal-4  { fill: #7dd3fc; animation-delay: 2.18s; }
+.petal-5  { fill: #86efac; animation-delay: 2.24s; }
+
+.petal-6  { fill: #bbf7d0; animation-delay: 2.30s; }
+.petal-7  { fill: #42d392; animation-delay: 2.36s; }
+.petal-8  { fill: #22c55e; animation-delay: 2.42s; }
+.petal-9  { fill: #38bdf8; animation-delay: 2.48s; }
+.petal-10 { fill: #3b82f6; animation-delay: 2.54s; }
+
+.petal-11 { fill: #60a5fa; animation-delay: 2.60s; }
+.petal-12 { fill: #93c5fd; animation-delay: 2.66s; }
+.petal-13 { fill: #86efac; animation-delay: 2.72s; }
+.petal-14 { fill: #42d392; animation-delay: 2.78s; }
+.petal-15 { fill: #7dd3fc; animation-delay: 2.84s; }
+
+.spark {
+    fill: #3b82f6;
+    opacity: 0;
+    animation: sparkleLoop 8s ease-in-out infinite;
+}
+
+.spark-1 {
+    animation-delay: 3.2s;
+}
+
+.spark-2 {
+    fill: #42d392;
+    animation-delay: 3.5s;
+}
+
+.spark-3 {
+    fill: #22c55e;
+    animation-delay: 3.8s;
+}
+
+@keyframes groundLoop {
+    0% {
+        opacity: 0;
+        transform: scaleX(0.4);
+    }
+
+    8%, 82% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleX(0.4);
+    }
+}
+
+@keyframes drawStemLoop {
+    0%, 8% {
+        stroke-dashoffset: 180;
+        opacity: 0;
+    }
+
+    25%, 78% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 180;
+        opacity: 0;
+    }
+}
+
+@keyframes popLeafLoop {
+    0%, 20% {
+        opacity: 0;
+        transform: scale(0.2) rotate(-12deg);
+    }
+
+    34% {
+        opacity: 1;
+        transform: scale(1.08) rotate(2deg);
+    }
+
+    72% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.2) rotate(8deg);
+    }
+}
+
+@keyframes popFlowerLoop {
+    0%, 32% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+
+    46% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
+
+    74% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+}
+
+@keyframes flowerCenterLoop {
+    0%, 36% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+
+    48% {
+        opacity: 1;
+        transform: scale(1.18);
+    }
+
+    74% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+}
+
+@keyframes sparkleLoop {
+    0%, 45% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.6);
+    }
+
+    58% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translateY(-18px) scale(1.05);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.7);
+    }
+}
+
+.plant-caption {
+    text-align: center;
+}
+
+.plant-caption h4 {
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.plant-caption p {
+    color: #475569;
+    margin: 0;
+    font-weight: 600;
+}
+
+.dark-mode .bloom-animation-card {
+    background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(5,46,43,0.8));
+    border-color: rgba(255,255,255,0.09);
+}
+
+.dark-mode .plant-caption h4 {
+    color: #f8fafc;
+}
+
+.dark-mode .plant-caption p {
+    color: #cbd5e1;
 }
