@@ -135,6 +135,10 @@ def historial():
         proyectos=proyectos
 
     )
+    
+@app.route("/login")
+def principal():
+    return render_template("login.html")
 
 # ======================================================
 # ERROR PAGE
