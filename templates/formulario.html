@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+
+{% block title %}
+Bloom AI | Formulario
+{% endblock %}
+
+{% block body %}
+
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+
+
+
+<section class="generator-section">
+
+    <div class="container">
+
+        <div class="row align-items-start form-layout">
+
+            <div class="col-lg-5">
+                 <div class="form-side-sticky">
+
+                <div class="hero-badge">
+                    🌿 Formulario inteligente
+                </div>
+
+                <h1 class="hero-title">
+                    Cuéntanos tu idea y Bloom AI la hará crecer
+                </h1>
+
+                <p class="hero-text">
+                    Responde con tus propias palabras. No necesitas saber de negocios; Bloom AI organizará tu información.
+                </p>
+
+                <div class="form-steps">
+
+                    <div class="step-item">
+                        <span>1</span>
+                        <p>Describe tu idea.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <span>2</span>
+                        <p>Comparte tus habilidades y recursos.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <span>3</span>
+                        <p>Bloom AI genera tu plan inicial.</p>
+                    </div>
+
+                </div>
+
+                <div class="image-slot large">
+                    Imagen sugerida: 480x520 px <br>
+                    Nombre ejemplo: form-bloom.png
+                </div>
+
+            </div>
+        </div>
+
+            <div class="col-lg-7">
+
+                <div class="generator-card floating preguntas-area">
+
+                    <div class="form-header">
+
+                        <div class="form-icon">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+
+                        <div>
+                            <h2>Crear proyecto</h2>
+                            <p>Completa la información para comenzar a florecer.</p>
+                        </div>
+
+                    </div>
+
+                    <form id="ideaForm" action="/formulario" method="POST">
+
+                        <div class="form-group-premium">
+                            <label for="idea_negocio">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                ¿Qué idea, producto o servicio te gustaría desarrollar?
+                            </label>
+
+                            <input
+                                id="idea_negocio"
+                                class="input-premium"
+                                type="text"
+                                name="idea_negocio"
+                                placeholder="Ejemplo: vender postres caseros, reparar celulares, dar asesorías..."
+                                required>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="descripcion_idea">
+                                <i class="fa-solid fa-pen-nib"></i>
+                                Describe tu idea con tus propias palabras
+                            </label>
+
+                            <textarea
+                                id="descripcion_idea"
+                                class="textarea-premium"
+                                name="descripcion_idea"
+                                rows="5"
+                                placeholder="Cuéntanos qué quieres hacer, cómo se te ocurrió y qué te gustaría lograr..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="problema_resuelve">
+                                <i class="fa-solid fa-circle-question"></i>
+                                ¿Qué problema buscas resolver con tu idea?
+                            </label>
+
+                            <textarea
+                                id="problema_resuelve"
+                                class="textarea-premium"
+                                name="problema_resuelve"
+                                rows="3"
+                                placeholder="Ejemplo: ayudar a estudiantes que no tienen tiempo para cocinar..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="publico_objetivo">
+                                <i class="fa-solid fa-users"></i>
+                                ¿A qué tipo de personas te gustaría ayudar o venderles?
+                            </label>
+
+                            <input
+                                id="publico_objetivo"
+                                class="input-premium"
+                                type="text"
+                                name="publico_objetivo"
+                                placeholder="Ejemplo: estudiantes, familias, adultos mayores, emprendedores..."
+                                required>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="contexto_local">
+                                <i class="fa-solid fa-location-dot"></i>
+                                ¿En qué ciudad, comunidad o contexto local piensas desarrollar tu idea?
+                            </label>
+
+                            <input
+                                id="contexto_local"
+                                class="input-premium"
+                                type="text"
+                                name="contexto_local"
+                                placeholder="Ejemplo: Pachuca, zona centro, escuela, colonia, comunidad..."
+                                required>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="experiencia">
+                                <i class="fa-solid fa-briefcase"></i>
+                                ¿Actualmente cuentas con experiencia relacionada con esta idea?
+                            </label>
+
+                            <textarea
+                                id="experiencia"
+                                class="textarea-premium"
+                                name="experiencia"
+                                rows="3"
+                                placeholder="Ejemplo: he vendido antes, ayudo en un negocio familiar, sé usar redes sociales..."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="habilidades">
+                                <i class="fa-solid fa-star"></i>
+                                ¿Qué habilidades consideras que tienes actualmente?
+                            </label>
+
+                            <textarea
+                                id="habilidades"
+                                class="textarea-premium"
+                                name="habilidades"
+                                rows="3"
+                                placeholder="Ejemplo: cocinar, vender, hablar con personas, diseñar, organizar, crear contenido..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="actividades">
+                                <i class="fa-solid fa-person-walking"></i>
+                                ¿Qué actividades realizas normalmente que podrían ayudarte en este proyecto?
+                            </label>
+
+                            <textarea
+                                id="actividades"
+                                class="textarea-premium"
+                                name="actividades"
+                                rows="3"
+                                placeholder="Ejemplo: administro grupos, vendo por WhatsApp, cuido personas, hago publicaciones..."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="equipo">
+                                <i class="fa-solid fa-people-group"></i>
+                                ¿Actualmente trabajas solo o tienes apoyo de alguien más?
+                            </label>
+
+                            <select id="equipo" class="input-premium" name="equipo">
+                                <option value="Solo">Trabajo solo</option>
+                                <option value="Con familia">Tengo apoyo de mi familia</option>
+                                <option value="Con amigos">Tengo apoyo de amigos</option>
+                                <option value="Con equipo">Tengo un equipo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>
+                                <i class="fa-solid fa-toolbox"></i>
+                                ¿Qué recursos tienes disponibles actualmente?
+                            </label>
+
+                            <div class="checkbox-grid">
+
+                                <label><input type="checkbox" name="recursos" value="Internet"> Internet</label>
+                                <label><input type="checkbox" name="recursos" value="Celular"> Celular</label>
+                                <label><input type="checkbox" name="recursos" value="Computadora"> Computadora</label>
+                                <label><input type="checkbox" name="recursos" value="Herramientas"> Herramientas</label>
+                                <label><input type="checkbox" name="recursos" value="Local"> Local</label>
+                                <label><input type="checkbox" name="recursos" value="Redes sociales"> Redes sociales</label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="objetivo">
+                                <i class="fa-solid fa-bullseye"></i>
+                                ¿Cuál sería tu principal objetivo con este proyecto?
+                            </label>
+
+                            <select id="objetivo" class="input-premium" name="objetivo" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="Generar ingresos">Generar ingresos</option>
+                                <option value="Emprender">Emprender</option>
+                                <option value="Aprender">Aprender</option>
+                                <option value="Conseguir clientes">Conseguir clientes</option>
+                                <option value="Crear una marca">Crear una marca</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>
+                                <i class="fa-solid fa-hand-holding-heart"></i>
+                                ¿Qué tipo de ayuda te gustaría recibir de Bloom AI?
+                            </label>
+
+                            <div class="checkbox-grid">
+
+                                <label><input type="checkbox" name="ayuda" value="Plan de negocio"> Plan de negocio</label>
+                                <label><input type="checkbox" name="ayuda" value="Marketing"> Marketing</label>
+                                <label><input type="checkbox" name="ayuda" value="Finanzas"> Finanzas</label>
+                                <label><input type="checkbox" name="ayuda" value="Redes sociales"> Redes sociales</label>
+                                <label><input type="checkbox" name="ayuda" value="Ideas de crecimiento"> Ideas de crecimiento</label>
+                                <label><input type="checkbox" name="ayuda" value="Todo lo anterior"> Todo lo anterior</label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="presupuesto">
+                                <i class="fa-solid fa-coins"></i>
+                                ¿Cuál es tu presupuesto aproximado para comenzar?
+                            </label>
+
+                            <input
+                                id="presupuesto"
+                                class="input-premium"
+                                type="text"
+                                name="presupuesto"
+                                placeholder="Ejemplo: $500, $1000, no tengo presupuesto todavía..."
+                            >
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>
+                                <i class="fa-solid fa-share-nodes"></i>
+                                ¿Qué redes sociales te interesa utilizar?
+                            </label>
+
+                            <div class="checkbox-grid">
+
+                                <label><input type="checkbox" name="redes" value="Facebook"> Facebook</label>
+                                <label><input type="checkbox" name="redes" value="Instagram"> Instagram</label>
+                                <label><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
+                                <label><input type="checkbox" name="redes" value="WhatsApp"> WhatsApp</label>
+                                <label><input type="checkbox" name="redes" value="YouTube"> YouTube</label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="dificultad">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                ¿Cuál consideras que es actualmente tu mayor dificultad para comenzar?
+                            </label>
+
+                            <textarea
+                                id="dificultad"
+                                class="textarea-premium"
+                                name="dificultad"
+                                rows="3"
+                                placeholder="Ejemplo: no sé cómo vender, no tengo dinero, no sé usar redes, me da pena comenzar..."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label for="comentarios_extra">
+                                <i class="fa-solid fa-message"></i>
+                                ¿Hay algo más que te gustaría contarle a Bloom AI?
+                            </label>
+
+                            <textarea
+                                id="comentarios_extra"
+                                class="textarea-premium"
+                                name="comentarios_extra"
+                                rows="3"
+                                placeholder="Puedes agregar cualquier detalle extra sobre tu idea..."
+                            ></textarea>
+                        </div>
+
+                        <div class="ai-info-box">
+
+                            <i class="fa-solid fa-sparkles"></i>
+
+                            <p>
+                                Bloom AI usará tus respuestas para generar un plan de negocio, kit de marketing, ideas de crecimiento y datos financieros iniciales.
+                            </p>
+
+                        </div>
+
+                        <button type="submit" class="generate-button">
+
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                            Hacer florecer mi proyecto
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="loading" class="d-none text-center my-5 py-5 w-100">
+            <div class="spinner-border text-success" role="status" style="width: 3rem; height: 3rem;"></div>
+            <p class="mt-3 text-muted">Cultivando tu estrategia personalizada con Inteligencia Artificial... 🧠🌱</p>
+        </div>
+
+        <div id="resultados" class="d-none row mt-5 g-4 w-100 pb-5">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 p-4 shadow-sm bg-white" style="border-radius: 1.25rem;">
+                    <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
+                        <i class="fa-solid fa-briefcase text-success fs-4"></i>
+                        <h4 class="m-0 font-bold text-dark">Estrategia Comercial</h4>
+                    </div>
+                    <div id="resNegocio" class="prose prose-slate text-secondary small max-w-none"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 p-4 shadow-sm bg-white" style="border-radius: 1.25rem;">
+                    <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
+                        <i class="fa-solid fa-bullhorn text-info fs-4"></i>
+                        <h4 class="m-0 font-bold text-dark">Presencia Digital</h4>
+                    </div>
+                    <div id="resMarketing" class="prose prose-slate text-secondary small max-w-none"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 p-4 shadow-sm bg-white" style="border-radius: 1.25rem;">
+                    <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
+                        <i class="fa-solid fa-coins text-warning fs-4"></i>
+                        <h4 class="m-0 font-bold text-dark">Presupuesto Inicial</h4>
+                    </div>
+                    <div id="resFinanzas" class="prose prose-slate text-secondary small max-w-none"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script src="/static/js/app.js"></script>
+
+{% endblock %}

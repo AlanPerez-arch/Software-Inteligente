@@ -1,121 +1,262 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmprendeAI - Democratizando el Éxito</title>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body class="bg-slate-50 font-sans min-h-screen flex flex-col justify-between">
+{% extends "base.html" %}
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="bg-indigo-600 text-white p-2 rounded-lg shadow-md shadow-indigo-200">
-                        <i class="fa-solid fa-rocket text-xl"></i>
-                    </div>
-                    <span class="text-xl font-bold text-slate-800 tracking-tight">Emprende<span class="text-indigo-600">AI</span></span>
+{% block title %}
+EmprendeAI Hub
+{% endblock %}
+
+{% block body %}
+
+<!-- BACKGROUND -->
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+
+
+
+
+<!-- HERO -->
+<section class="hero-premium">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-100">
+
+            <!-- LEFT -->
+            <div class="col-lg-6">
+
+                <div class="hero-badge">
+
+                    ✨ Inteligencia Artificial para emprendedores
+
                 </div>
-                <div class="flex items-center gap-4">
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-medium px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                        <span class="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Llama 3 Open-Source
-                    </span>
+
+                <h1 class="hero-title">
+
+                    Convierte ideas simples
+                    en negocios increíbles
+
+                </h1>
+
+                <p class="hero-text">
+
+                    Genera planes de negocio,
+                    marketing y simulaciones financieras
+                    usando modelos open-source avanzados.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#generator"
+                       class="btn-primary-premium">
+
+                        Empezar Gratis
+
+                    </a>
+
+                    <a href="#features"
+                       class="btn-secondary-premium">
+
+                        Ver Demo
+
+                    </a>
+
                 </div>
+
             </div>
-        </div>
-    </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
-        <div class="text-center max-w-3xl mx-auto mb-10">
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl mb-4">
-                La Inteligencia Artificial al alcance de tu negocio
-            </h1>
-            <p class="text-lg text-slate-600">
-                Describe tu idea en un párrafo. Nuestro modelo de código abierto generará un kit inicial completo de negocios, marketing y finanzas para que arranques mañana mismo.
+            <!-- RIGHT -->
+            <div class="col-lg-6">
+
+                <div class="dashboard-preview floating">
+
+                    <div class="dashboard-top">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                    <div class="dashboard-content">
+
+                        <div class="ai-line"></div>
+
+                        <div class="dashboard-card">
+
+                            <h5>Plan de Negocio</h5>
+
+                            <p>
+                                Estrategia empresarial generada
+                                automáticamente.
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-card">
+
+                            <h5>Marketing IA</h5>
+
+                            <p>
+                                Publicaciones optimizadas para redes.
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-card">
+
+                            <h5>Finanzas</h5>
+
+                            <p>
+                                Estimaciones inteligentes de ingresos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GENERATOR -->
+<section id="generator" class="generator-section">
+
+    <div class="container">
+
+        <div class="generator-card">
+
+            <h2>
+
+                Describe tu idea
+
+            </h2>
+
+            <p>
+
+                La IA construirá un kit completo para iniciar.
+
             </p>
-        </div>
 
-        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-12">
-            <form id="ideaForm" class="space-y-4">
-                <textarea 
-                    id="ideaInput" 
-                    rows="4" 
-                    required
-                    class="w-full px-4 py-3 rounded-xl border border-slate-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800 placeholder-slate-400 resize-none transition"
-                    placeholder="Escribe tu idea con el teclado o usa el botón de arriba para dictarla con tu voz... Ej: Quiero vender galletas saludables a domicilio."
-                ></textarea>
-                <div class="flex justify-between items-center mb-2">
-                    <label for="ideaInput" class="block text-sm font-semibold text-slate-700">¿Cuál es tu idea de negocio o proyecto?</label>
-                    <button type="button" id="btnVoz" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center gap-1 transition">
-                        <i class="fa-solid fa-microphone" id="iconoMicro"></i> <span id="textoMicro">Dictar idea</span>
-                    </button>
-                </div>
-                <button 
-                    type="submit" 
-                    id="btnGenerar"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3.5 px-4 rounded-xl shadow-lg shadow-indigo-100 transition duration-150 flex items-center justify-center gap-2"
-                >
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Kit de Arranque Gratuito
+            <form action="/generar"
+                  method="POST">
+
+                <textarea
+                    class="textarea-premium"
+                    name="idea"
+                    rows="6"
+                    placeholder="Ejemplo: Quiero vender café artesanal en mi ciudad..."
+                    required>
+                </textarea>
+
+                <button
+                    type="submit"
+                    class="generate-button">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Generar Proyecto
+
                 </button>
+
             </form>
-        </div>
-
-        <div id="loading" class="hidden text-center py-12 space-y-4 animate-fade-in">
-            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-indigo-600 border-t-transparent"></div>
-            <p class="text-slate-600 font-medium text-lg">La IA está estructurando tus recursos de emprendimiento... 🧠</p>
-        </div>
-
-        <div id="resultados" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
-                    <div class="bg-blue-50 text-blue-600 p-2.5 rounded-xl">
-                        <i class="fa-solid fa-briefcase text-lg"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">Estrategia Comercial</h3>
-                        <p class="text-xs text-slate-500">Plan de Negocios Express</p>
-                    </div>
-                </div>
-                <div id="resNegocio" class="prose prose-slate prose-sm max-w-none text-slate-600"></div>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
-                    <div class="bg-purple-50 text-purple-600 p-2.5 rounded-xl">
-                        <i class="fa-solid fa-share-nodes text-lg"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">Presencia Digital</h3>
-                        <p class="text-xs text-slate-500">Kits para Redes Sociales</p>
-                    </div>
-                </div>
-                <div id="resMarketing" class="prose prose-slate prose-sm max-w-none text-slate-600"></div>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
-                    <div class="bg-amber-50 text-amber-600 p-2.5 rounded-xl">
-                        <i class="fa-solid fa-wallet text-lg"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">Presupuesto Inicial</h3>
-                        <p class="text-xs text-slate-500">Gastos Críticos Esenciales</p>
-                    </div>
-                </div>
-                <div id="resFinanzas" class="prose prose-slate prose-sm max-w-none text-slate-600"></div>
-            </div>
 
         </div>
-    </main>
 
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500">
-        <p>&copy; 2026 EmprendeAI Hub. Desarrollado en 24 horas para democratizar el acceso a la tecnología.</p>
-    </footer>
+    </div>
 
-    <script src="/static/js/app.js"></script>
-</body>
-</html>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features-premium">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Todo lo que necesitas
+            </h2>
+
+            <p>
+                Herramientas inteligentes para lanzar tu negocio.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="feature-premium">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <h3>Plan de Negocio</h3>
+
+                    <p>
+                        Propuesta de valor,
+                        clientes y estrategias.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-premium">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                    </div>
+
+                    <h3>Marketing</h3>
+
+                    <p>
+                        Contenido viral para redes sociales.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-premium">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+                    <h3>Finanzas</h3>
+
+                    <p>
+                        Costos, ingresos y proyecciones.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
