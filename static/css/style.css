@@ -109,6 +109,15 @@ body{
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(59, 130, 246, 0.12);
     box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+
+}
+
+/* ===== CONTENEDOR DE ACCIONES EN NAVBAR ===== */
+.navbar-actions {
+    display: flex;
+    flex-direction: row; /* Los alinea de forma horizontal */
+    align-items: center; /* Los centra verticalmente entre sí */
+    gap: 15px;           /* Controla la separación entre los elementos */
 }
 
 .navbar-flex {
@@ -886,7 +895,7 @@ body{
 
     cursor: pointer;
 
-    position: relative;
+    position:relative;
 
     color: rgb(168, 163, 163);
 
@@ -2121,7 +2130,7 @@ body.light-mode .voice-label{
 
 .navbar-flex {
     display: flex;
-    align-items: center;
+    align-items:flex-end;
     justify-content: space-between;
     gap: 25px;
 }
