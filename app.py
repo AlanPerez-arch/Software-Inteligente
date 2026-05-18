@@ -140,6 +140,14 @@ def historial():
 def principal():
     return render_template("login.html")
 
+@app.route("/formulario")
+def formulario():
+
+    return render_template(
+
+        "formulario.html"
+
+    )
 # ======================================================
 # ERROR PAGE
 # ======================================================
