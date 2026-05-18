@@ -1,2 +1,5 @@
+# Ignorar la carpeta de entorno virtual
 venve
-readme.md
+
+# Ignorar el .env
+.env
