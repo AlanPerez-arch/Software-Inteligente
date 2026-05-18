@@ -1,253 +1,112 @@
 {% extends "base.html" %}
 
 {% block title %}
-EmprendeAI Hub
+Bloom AI | Login
 {% endblock %}
 
 {% block body %}
 
-<!-- BACKGROUND -->
 <div class="aurora aurora-1"></div>
 <div class="aurora aurora-2"></div>
 <div class="aurora aurora-3"></div>
 
-
-
-
-<!-- HERO -->
-<section class="hero-premium">
+<section class="login-premium">
 
     <div class="container">
 
         <div class="row align-items-center min-vh-100">
 
-            <!-- LEFT -->
             <div class="col-lg-6">
 
                 <div class="hero-badge">
-
-                    ✨ Inteligencia Artificial para emprendedores
-
+                    🌱 Inteligencia Artificial inclusiva
                 </div>
 
                 <h1 class="hero-title">
-
-                    Convierte ideas simples
-                    en negocios increíbles
-
+                    Haz florecer tu potencial
                 </h1>
 
                 <p class="hero-text">
-
-                    Genera planes de negocio,
-                    marketing y simulaciones financieras
-                    usando modelos open-source avanzados.
-
+                    Bloom AI transforma ideas simples, experiencias y habilidades en oportunidades reales de emprendimiento.
                 </p>
 
-                <div class="hero-buttons">
-
-                    <a href="#generator"
-                       class="btn-primary-premium">
-
-                        Empezar Gratis
-
-                    </a>
-
-                    <a href="#features"
-                       class="btn-secondary-premium">
-
-                        Ver Demo
-
-                    </a>
-
+                <div class="image-slot large">
+                    Imagen sugerida: 520x420 px <br>
+                    Nombre ejemplo: login-bloom.png
                 </div>
 
             </div>
 
-            <!-- RIGHT -->
-            <div class="col-lg-6">
+            <div class="col-lg-5 offset-lg-1">
 
-                <div class="dashboard-preview floating">
+                <div class="login-card floating">
 
-                    <div class="dashboard-top">
+                    <div class="text-center mb-4">
+                        <div class="logo-icon mx-auto mb-3">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
 
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
+                        <h2>Bienvenido a Bloom AI</h2>
+                        <p>Inicia sesión o crea tu cuenta</p>
                     </div>
 
-                    <div class="dashboard-content">
+                    <ul class="nav nav-pills nav-fill mb-4">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#login">
+                                Login
+                            </button>
+                        </li>
 
-                        <div class="ai-line"></div>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#registro">
+                                Registro
+                            </button>
+                        </li>
+                    </ul>
 
-                        <div class="dashboard-card">
+                    <div class="tab-content">
 
-                            <h5>Plan de Negocio</h5>
+                        <div class="tab-pane fade show active" id="login">
 
-                            <p>
-                                Estrategia empresarial generada
-                                automáticamente.
-                            </p>
+                            <form action="/login" method="POST">
+
+                                <input type="hidden" name="accion" value="login">
+
+                                <input class="input-premium" type="email" name="correo" placeholder="Correo electrónico" required>
+
+                                <input class="input-premium" type="password" name="password" placeholder="Contraseña" required>
+
+                                <button class="btn-primary-premium w-100" type="submit">
+                                    Entrar
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+
+                            </form>
 
                         </div>
 
-                        <div class="dashboard-card">
+                        <div class="tab-pane fade" id="registro">
 
-                            <h5>Marketing IA</h5>
+                            <form action="/login" method="POST">
 
-                            <p>
-                                Publicaciones optimizadas para redes.
-                            </p>
+                                <input type="hidden" name="accion" value="registro">
+
+                                <input class="input-premium" type="text" name="nombre" placeholder="Nombre completo" required>
+
+                                <input class="input-premium" type="email" name="correo" placeholder="Correo electrónico" required>
+
+                                <input class="input-premium" type="password" name="password" placeholder="Contraseña" required>
+
+                                <button class="btn-green-premium w-100" type="submit">
+                                    Crear cuenta
+                                    <i class="fa-solid fa-leaf"></i>
+                                </button>
+
+                            </form>
 
                         </div>
 
-                        <div class="dashboard-card">
-
-                            <h5>Finanzas</h5>
-
-                            <p>
-                                Estimaciones inteligentes de ingresos.
-                            </p>
-
-                        </div>
-
                     </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- GENERATOR -->
-<section id="generator" class="generator-section">
-
-    <div class="container">
-
-        <div class="generator-card">
-
-            <h2>
-
-                Describe tu idea
-
-            </h2>
-
-            <p>
-
-                La IA construirá un kit completo para iniciar.
-
-            </p>
-
-            <form action="/generar"
-                  method="POST">
-
-                <textarea
-                    class="textarea-premium"
-                    name="idea"
-                    rows="6"
-                    placeholder="Ejemplo: Quiero vender café artesanal en mi ciudad..."
-                    required>
-                </textarea>
-
-                <button
-                    type="submit"
-                    class="generate-button">
-
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-
-                    Generar Proyecto
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- FEATURES -->
-<section id="features" class="features-premium">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>
-                Todo lo que necesitas
-            </h2>
-
-            <p>
-                Herramientas inteligentes para lanzar tu negocio.
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-md-4">
-
-                <div class="feature-premium">
-
-                    <div class="feature-icon">
-
-                        <i class="fa-solid fa-briefcase"></i>
-
-                    </div>
-
-                    <h3>Plan de Negocio</h3>
-
-                    <p>
-                        Propuesta de valor,
-                        clientes y estrategias.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="feature-premium">
-
-                    <div class="feature-icon">
-
-                        <i class="fa-solid fa-bullhorn"></i>
-
-                    </div>
-
-                    <h3>Marketing</h3>
-
-                    <p>
-                        Contenido viral para redes sociales.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="feature-premium">
-
-                    <div class="feature-icon">
-
-                        <i class="fa-solid fa-chart-line"></i>
-
-                    </div>
-
-                    <h3>Finanzas</h3>
-
-                    <p>
-                        Costos, ingresos y proyecciones.
-                    </p>
 
                 </div>
 

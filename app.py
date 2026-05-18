@@ -1,6 +1,26 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.secret_key = "bloom_ai_secret_key"
+
+# ======================================================
+# USUARIOS DEMO EN MEMORIA
+# ======================================================
+
+usuarios = {
+    "demo@bloom.com": {
+        "nombre": "Usuario Demo",
+        "password": generate_password_hash("1234")
+    }
+}
+
+# ======================================================
+# VALIDACIÓN DE LOGIN
+# ======================================================
+
+def login_requerido():
+    return "usuario" in session
 
 # ======================================================
 # HOME
@@ -9,11 +29,67 @@ app = Flask(__name__)
 @app.route("/")
 def inicio():
 
-    return render_template(
+    if not login_requerido():
+        return redirect(url_for("login"))
 
-        "index.html"
+    return render_template("index.html")
 
-    )
+# ======================================================
+# LOGIN
+# ======================================================
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if login_requerido():
+        return redirect(url_for("inicio"))
+
+    if request.method == "POST":
+        accion = request.form.get("accion")
+        correo = request.form.get("correo")
+        password = request.form.get("password")
+
+        if accion == "registro":
+            nombre = request.form.get("nombre")
+
+            if correo in usuarios:
+                flash("Ese correo ya está registrado.", "danger")
+                return redirect(url_for("login"))
+
+            usuarios[correo] = {
+                "nombre": nombre,
+                "password": generate_password_hash(password)
+            }
+
+            session["usuario"] = correo
+            session["nombre"] = nombre
+            session["es_nuevo"] = True
+
+            return redirect(url_for("inicio"))
+
+        usuario = usuarios.get(correo)
+
+        if usuario and check_password_hash(usuario["password"], password):
+            session["usuario"] = correo
+            session["nombre"] = usuario["nombre"]
+            session["es_nuevo"] = False
+
+            return redirect(url_for("inicio"))
+
+        flash("Correo o contraseña incorrectos.", "danger")
+
+    return render_template("login.html")
+
+# ======================================================
+# LOGOUT
+# ======================================================
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect(url_for("login"))
 
 # ======================================================
 # DASHBOARD
@@ -21,6 +97,9 @@ def inicio():
 
 @app.route("/dashboard")
 def dashboard():
+
+    if not login_requerido():
+        return redirect(url_for("login"))
 
     return render_template(
 
@@ -79,10 +158,12 @@ def dashboard():
 @app.route("/historial")
 def historial():
 
+    if not login_requerido():
+        return redirect(url_for("login"))
+
     proyectos = [
 
         {
-
             "idea": "Pastelería artesanal a domicilio",
 
             "contexto": """
@@ -93,11 +174,9 @@ def historial():
             "estado": "Generado",
 
             "fecha": "18 Mayo 2026"
-
         },
 
         {
-
             "idea": "Cafetería temática gamer",
 
             "contexto": """
@@ -108,11 +187,9 @@ def historial():
             "estado": "Procesando",
 
             "fecha": "17 Mayo 2026"
-
         },
 
         {
-
             "idea": "Tienda de ropa vintage",
 
             "contexto": """
@@ -123,37 +200,44 @@ def historial():
             "estado": "Generado",
 
             "fecha": "15 Mayo 2026"
-
         }
 
     ]
 
     return render_template(
-
         "historial.html",
-
         proyectos=proyectos
-
     )
-    
-@app.route("/login")
-def principal():
-    return render_template("login.html")
 
-@app.route("/formulario")
+# ======================================================
+# FORMULARIO
+# ======================================================
+
+@app.route("/formulario", methods=["GET", "POST"])
 def formulario():
 
-    return render_template(
+    if not login_requerido():
+        return redirect(url_for("login"))
 
-        "formulario.html"
+    if request.method == "POST":
 
-    )
+        session["es_nuevo"] = False
+
+        flash("Tu proyecto fue enviado correctamente.", "success")
+
+        return redirect(url_for("dashboard"))
+
+    return render_template("formulario.html")
+
 # ======================================================
 # ERROR PAGE
 # ======================================================
 
 @app.route("/error")
 def error():
+
+    if not login_requerido():
+        return redirect(url_for("login"))
 
     return render_template(
 
@@ -168,6 +252,13 @@ def error():
         """
 
     )
+    
+@app.route("/principal")
+def principal():
+    return render_template(
+
+        "principal.html",
+    )
 
 # ======================================================
 # RUN SERVER
@@ -175,8 +266,4 @@ def error():
 
 if __name__ == "__main__":
 
-    app.run(
-
-        debug=True
-
-    )
+    app.run(debug=True)
