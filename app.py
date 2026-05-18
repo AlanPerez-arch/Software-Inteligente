@@ -57,6 +57,8 @@ def generar_kit():
         "marketing": marketing,
         "finanzas": finanzas
     })
+    
+
 
 if __name__ == '__main__':
     # debug=True reinicia el servidor automáticamente si haces cambios

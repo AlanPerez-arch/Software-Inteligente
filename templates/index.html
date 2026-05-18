@@ -40,15 +40,18 @@
 
         <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-12">
             <form id="ideaForm" class="space-y-4">
-                <div>
-                    <label for="ideaInput" class="block text-sm font-semibold text-slate-700 mb-2">¿Cuál es tu idea de negocio o proyecto?</label>
-                    <textarea 
-                        id="ideaInput" 
-                        rows="4" 
-                        required
-                        class="w-full px-4 py-3 rounded-xl border border-slate-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800 placeholder-slate-400 resize-none transition"
-                        placeholder="Ejemplo: Quiero vender galletas saludables de avena y plátano a domicilio en mi colonia, enfocadas en personas que hacen ejercicio pero no tengo mucho presupuesto..."
-                    ></textarea>
+                <textarea 
+                    id="ideaInput" 
+                    rows="4" 
+                    required
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800 placeholder-slate-400 resize-none transition"
+                    placeholder="Escribe tu idea con el teclado o usa el botón de arriba para dictarla con tu voz... Ej: Quiero vender galletas saludables a domicilio."
+                ></textarea>
+                <div class="flex justify-between items-center mb-2">
+                    <label for="ideaInput" class="block text-sm font-semibold text-slate-700">¿Cuál es tu idea de negocio o proyecto?</label>
+                    <button type="button" id="btnVoz" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center gap-1 transition">
+                        <i class="fa-solid fa-microphone" id="iconoMicro"></i> <span id="textoMicro">Dictar idea</span>
+                    </button>
                 </div>
                 <button 
                     type="submit" 
