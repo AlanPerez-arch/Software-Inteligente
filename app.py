@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(
 
-@app.route('/')
-def home():
-    return '¡Hola desde Flask!'
+    __name__,
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    template_folder='statics/templates',
+
+    static_folder='statics'
+
+)
