@@ -3,3 +3,6 @@ venve
 
 # Ignorar el .env
 .env
+
+# ingnorar el entorno de visual
+.vscode
