@@ -50,7 +50,7 @@ def crear_proyecto():
     idea_negocio = datos['idea_negocio']
     contexto_local = datos.get('contexto_local', '')
         
-    # 2. Conexión a la base de datos e insertar (¡AHORA SÍ INDENTADO!)
+    # 2. Conexión a la base de datos e insertar 
     conn = get_db_connection()
     if conn:
         try:
