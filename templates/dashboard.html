@@ -17,21 +17,27 @@ Dashboard | EmprendeAI Hub
 
         </h1>
 
+        {% if proyecto %}
         <!-- STATUS -->
         <div class="dashboard-status">
 
             <div class="status-badge">
 
-                {{ estado }}
+                {{ proyecto.estado }}
 
             </div>
 
             <div class="creation-date">
 
-                {{ fecha_creacion }}
+                Proyecto ID {{ proyecto.id }}
 
             </div>
 
+        </div>
+
+        <div class="dashboard-subtitle mb-4">
+            <strong>{{ proyecto.idea_negocio }}</strong>
+            <p class="text-muted">{{ proyecto.contexto_local }}</p>
         </div>
 
         <!-- GRID -->
@@ -48,82 +54,13 @@ Dashboard | EmprendeAI Hub
 
                 <h3>
 
-                    Resumen del negocio
+                    Plan de negocio
 
                 </h3>
 
                 <p>
 
-                    {{ resumen_negocio }}
-
-                </p>
-
-            </div>
-
-            <!-- CARD -->
-            <div class="dashboard-card-premium">
-
-                <div class="dashboard-icon">
-
-                    <i class="fa-solid fa-gem"></i>
-
-                </div>
-
-                <h3>
-
-                    Propuesta de valor
-
-                </h3>
-
-                <p>
-
-                    {{ propuesta_valor }}
-
-                </p>
-
-            </div>
-
-            <!-- CARD -->
-            <div class="dashboard-card-premium">
-
-                <div class="dashboard-icon">
-
-                    <i class="fa-solid fa-users"></i>
-
-                </div>
-
-                <h3>
-
-                    Público objetivo
-
-                </h3>
-
-                <p>
-
-                    {{ publico_objetivo }}
-
-                </p>
-
-            </div>
-
-            <!-- CARD -->
-            <div class="dashboard-card-premium">
-
-                <div class="dashboard-icon">
-
-                    <i class="fa-solid fa-store"></i>
-
-                </div>
-
-                <h3>
-
-                    Canales de venta
-
-                </h3>
-
-                <p>
-
-                    {{ canales_venta }}
+                    {{ proyecto.plan_negocio.texto }}
 
                 </p>
 
@@ -140,13 +77,13 @@ Dashboard | EmprendeAI Hub
 
                 <h3>
 
-                    Publicaciones para redes
+                    Kit de marketing
 
                 </h3>
 
                 <p>
 
-                    {{ publicaciones_redes }}
+                    {{ proyecto.kit_marketing.texto }}
 
                 </p>
 
@@ -163,42 +100,46 @@ Dashboard | EmprendeAI Hub
 
                 <h3>
 
-                    Estimación de costos
+                    Finanzas
 
                 </h3>
 
                 <p>
 
-                    {{ estimacion_costos }}
-
-                </p>
-
-            </div>
-
-            <!-- CARD -->
-            <div class="dashboard-card-premium">
-
-                <div class="dashboard-icon">
-
-                    <i class="fa-solid fa-chart-line"></i>
-
-                </div>
-
-                <h3>
-
-                    Posibles ingresos
-
-                </h3>
-
-                <p>
-
-                    {{ posibles_ingresos }}
+                    {{ proyecto.datos_financieros.texto }}
 
                 </p>
 
             </div>
 
         </div>
+
+        {% if proyectos|length > 1 %}
+        <div class="dashboard-history mt-5">
+            <h2>Proyectos guardados</h2>
+            <ul class="project-list">
+                {% for item in proyectos %}
+                    <li>Proyecto #{{ item.id }} - {{ item.idea_negocio }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="dashboard-status">
+            <div class="status-badge">
+                Sin resultados
+            </div>
+            <div class="creation-date">
+                Aún no hay proyectos guardados
+            </div>
+        </div>
+
+        <div class="dashboard-empty">
+            <p>No se han encontrado resultados guardados para tu usuario. Crea un proyecto en el formulario para ver tus respuestas aquí.</p>
+        </div>
+
+        {% endif %}
 
         <!-- BUTTONS -->
         <div class="dashboard-actions">

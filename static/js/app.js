@@ -1,5 +1,8 @@
-document.getElementById('ideaForm').addEventListener('submit', async function(e) {
-    e.preventDefault(); // 💥 DETIENE EL REFRESCO: Mantiene el formulario intacto y permite la navegación SPA
+const ideaForm = document.getElementById('ideaForm');
+
+if (ideaForm) {
+    ideaForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); // 💥 DETIENE EL REFRESCO: Mantiene el formulario intacto y permite la navegación SPA
 
     const btnGenerar = document.querySelector('.generate-button');
     const loadingSection = document.getElementById('loading');
@@ -22,6 +25,7 @@ document.getElementById('ideaForm').addEventListener('submit', async function(e)
         // Enviar los datos asíncronamente a Flask usando la ruta relativa del navegador
         const response = await fetch('/formulario', {
             method: 'POST',
+            credentials: 'same-origin',
             body: formData // Envía el paquete de datos estructurado en formato multipart/form-data
         });
 
@@ -47,4 +51,5 @@ document.getElementById('ideaForm').addEventListener('submit', async function(e)
         if (loadingSection) loadingSection.classList.add('hidden');
         btnGenerar.disabled = false;
     }
-});
+    });
+}

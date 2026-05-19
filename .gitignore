@@ -1,6 +1,10 @@
-# ignorar archivos de entorno y otros archivos que no deberían ser compartidos
-venve
-readme.md
+# Ignorar archivos de entorno y otros archivos que no deberían ser compartidos
+venve/
+__pycache__/
+*.pyc
 
-# ignorar el archivo .env que contiene la clave de la API
+# Ignorar el archivo .env que contiene la clave de la API
 .env
+
+# Ignorar configuración local del editor
+.vscode/

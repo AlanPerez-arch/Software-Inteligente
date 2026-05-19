@@ -10,8 +10,6 @@ Bloom AI | Formulario
 <div class="aurora aurora-2"></div>
 <div class="aurora aurora-3"></div>
 
-
-
 <section class="generator-section">
 
     <div class="container">
@@ -77,7 +75,7 @@ Bloom AI | Formulario
 
                     </div>
 
-                    <form id="ideaForm" action="/formulario" method="POST">
+                    <form id="ideaForm">
 
                         <div class="form-group-premium">
                             <label for="idea_negocio">
@@ -220,14 +218,12 @@ Bloom AI | Formulario
                             </label>
 
                             <div class="checkbox-grid">
-
                                 <label><input type="checkbox" name="recursos" value="Internet"> Internet</label>
                                 <label><input type="checkbox" name="recursos" value="Celular"> Celular</label>
                                 <label><input type="checkbox" name="recursos" value="Computadora"> Computadora</label>
                                 <label><input type="checkbox" name="recursos" value="Herramientas"> Herramientas</label>
                                 <label><input type="checkbox" name="recursos" value="Local"> Local</label>
                                 <label><input type="checkbox" name="recursos" value="Redes sociales"> Redes sociales</label>
-
                             </div>
                         </div>
 
@@ -255,14 +251,12 @@ Bloom AI | Formulario
                             </label>
 
                             <div class="checkbox-grid">
-
                                 <label><input type="checkbox" name="ayuda" value="Plan de negocio"> Plan de negocio</label>
                                 <label><input type="checkbox" name="ayuda" value="Marketing"> Marketing</label>
                                 <label><input type="checkbox" name="ayuda" value="Finanzas"> Finanzas</label>
                                 <label><input type="checkbox" name="ayuda" value="Redes sociales"> Redes sociales</label>
                                 <label><input type="checkbox" name="ayuda" value="Ideas de crecimiento"> Ideas de crecimiento</label>
                                 <label><input type="checkbox" name="ayuda" value="Todo lo anterior"> Todo lo anterior</label>
-
                             </div>
                         </div>
 
@@ -288,13 +282,11 @@ Bloom AI | Formulario
                             </label>
 
                             <div class="checkbox-grid">
-
                                 <label><input type="checkbox" name="redes" value="Facebook"> Facebook</label>
                                 <label><input type="checkbox" name="redes" value="Instagram"> Instagram</label>
                                 <label><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
                                 <label><input type="checkbox" name="redes" value="WhatsApp"> WhatsApp</label>
                                 <label><input type="checkbox" name="redes" value="YouTube"> YouTube</label>
-
                             </div>
                         </div>
 
@@ -329,72 +321,50 @@ Bloom AI | Formulario
                         </div>
 
                         <div class="ai-info-box">
-
                             <i class="fa-solid fa-sparkles"></i>
-
                             <p>
                                 Bloom AI usará tus respuestas para generar un plan de negocio, kit de marketing, ideas de crecimiento y datos financieros iniciales.
                             </p>
-
                         </div>
 
-                        <button type="submit" class="generate-button">
-
+                        <button type="submit" id="btn-generar" class="generate-button">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
-
                             Hacer florecer mi proyecto
-
                         </button>
 
                     </form>
 
-                </div>
-
-            </div>
-
-        </div>
-
-        <div id="loading" class="d-none text-center my-5 py-5 w-100">
-            <div class="spinner-border text-success" role="status" style="width: 3rem; height: 3rem;"></div>
-            <p class="mt-3 text-muted">Cultivando tu estrategia personalizada con Inteligencia Artificial... 🧠🌱</p>
-        </div>
-
-        <div id="resultados" class="d-none row mt-5 g-4 w-100 pb-5">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 p-4 shadow-sm bg-white" style="border-radius: 1.25rem;">
-                    <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
-                        <i class="fa-solid fa-briefcase text-success fs-4"></i>
-                        <h4 class="m-0 font-bold text-dark">Estrategia Comercial</h4>
+                    <div id="loading" class="hidden mt-4">
+                        <div class="loading-box">
+                            <p>Generando tu plan con Bloom AI, por favor espera...</p>
+                        </div>
                     </div>
-                    <div id="resNegocio" class="prose prose-slate text-secondary small max-w-none"></div>
+
+                    <section id="resultados" class="hidden resultados-area mt-4">
+                        <div class="result-card">
+                            <h3>Plan de negocio</h3>
+                            <div id="resNegocio"></div>
+                        </div>
+
+                        <div class="result-card">
+                            <h3>Marketing</h3>
+                            <div id="resMarketing"></div>
+                        </div>
+
+                        <div class="result-card">
+                            <h3>Finanzas</h3>
+                            <div id="resFinanzas"></div>
+                        </div>
+                    </section>
+
                 </div>
+
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 p-4 shadow-sm bg-white" style="border-radius: 1.25rem;">
-                    <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
-                        <i class="fa-solid fa-bullhorn text-info fs-4"></i>
-                        <h4 class="m-0 font-bold text-dark">Presencia Digital</h4>
-                    </div>
-                    <div id="resMarketing" class="prose prose-slate text-secondary small max-w-none"></div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 p-4 shadow-sm bg-white" style="border-radius: 1.25rem;">
-                    <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
-                        <i class="fa-solid fa-coins text-warning fs-4"></i>
-                        <h4 class="m-0 font-bold text-dark">Presupuesto Inicial</h4>
-                    </div>
-                    <div id="resFinanzas" class="prose prose-slate text-secondary small max-w-none"></div>
-                </div>
-            </div>
+
         </div>
 
     </div>
 
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-<script src="/static/js/app.js"></script>
 
 {% endblock %}
