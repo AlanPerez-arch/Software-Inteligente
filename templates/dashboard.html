@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | EmprendeAI Hub
+{% endblock %}
+
+{% block body %}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+        <!-- TITLE -->
+        <h1 class="dashboard-title">
+
+            Resultado generado por IA 🚀
+
+        </h1>
+
+        <!-- STATUS -->
+        <div class="dashboard-status">
+
+            <div class="status-badge">
+
+                {{ estado }}
+
+            </div>
+
+            <div class="creation-date">
+
+                {{ fecha_creacion }}
+
+            </div>
+
+        </div>
+
+        <!-- GRID -->
+        <div class="dashboard-grid">
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-lightbulb"></i>
+
+                </div>
+
+                <h3>
+
+                    Resumen del negocio
+
+                </h3>
+
+                <p>
+
+                    {{ resumen_negocio }}
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-gem"></i>
+
+                </div>
+
+                <h3>
+
+                    Propuesta de valor
+
+                </h3>
+
+                <p>
+
+                    {{ propuesta_valor }}
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <h3>
+
+                    Público objetivo
+
+                </h3>
+
+                <p>
+
+                    {{ publico_objetivo }}
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-store"></i>
+
+                </div>
+
+                <h3>
+
+                    Canales de venta
+
+                </h3>
+
+                <p>
+
+                    {{ canales_venta }}
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-bullhorn"></i>
+
+                </div>
+
+                <h3>
+
+                    Publicaciones para redes
+
+                </h3>
+
+                <p>
+
+                    {{ publicaciones_redes }}
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-coins"></i>
+
+                </div>
+
+                <h3>
+
+                    Estimación de costos
+
+                </h3>
+
+                <p>
+
+                    {{ estimacion_costos }}
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="dashboard-card-premium">
+
+                <div class="dashboard-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+                <h3>
+
+                    Posibles ingresos
+
+                </h3>
+
+                <p>
+
+                    {{ posibles_ingresos }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="dashboard-actions">
+
+            <a href="/"
+               class="btn-dashboard btn-primary-dashboard">
+
+                Nuevo Proyecto
+
+            </a>
+
+            <a href="#"
+               class="btn-dashboard btn-secondary-dashboard">
+
+                Descargar PDF
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}
+Bloom AI | Login
+{% endblock %}
+
+{% block body %}
+
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+
+<section class="login-premium">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-100">
+
+            <div class="col-lg-6">
+
+                <div class="hero-badge">
+                    🌱 Inteligencia Artificial inclusiva
+                </div>
+
+                <h1 class="hero-title">
+                    Haz florecer tu potencial
+                </h1>
+
+                <p class="hero-text">
+                    Bloom AI transforma ideas simples, experiencias y habilidades en oportunidades reales de emprendimiento.
+                </p>
+
+                <div class="image-slot large">
+                    Imagen sugerida: 520x420 px <br>
+                    Nombre ejemplo: login-bloom.png
+                </div>
+
+            </div>
+
+            <div class="col-lg-5 offset-lg-1">
+
+                <div class="login-card floating">
+
+                    <div class="text-center mb-4">
+                        <div class="logo-icon mx-auto mb-3">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+
+                        <h2>Bienvenido a Bloom AI</h2>
+                        <p>Inicia sesión o crea tu cuenta</p>
+                    </div>
+
+                    <ul class="nav nav-pills nav-fill mb-4">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#login">
+                                Login
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#registro">
+                                Registro
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade show active" id="login">
+
+                            <form id="form-login">
+
+                                <input class="input-premium" type="email" id="login-correo" placeholder="Correo electrónico" required>
+
+                                <input class="input-premium" type="password" id="login-contrasena" placeholder="Contraseña" required>
+
+                                <button class="btn-primary-premium w-100" type="submit" id="btn-entrar">
+                                    Entrar
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="registro">
+
+                            <form id="form-registro">
+
+                                <input class="input-premium" type="text" id="reg-nombre" placeholder="Nombre completo" required>
+
+                                <input class="input-premium" type="email" id="reg-correo" placeholder="Correo electrónico" required>
+
+                                <input class="input-premium" type="password" id="reg-contrasena" placeholder="Contraseña" required>
+
+                                <button class="btn-green-premium w-100" type="submit" id="btn-registrar">
+                                    Crear cuenta
+                                    <i class="fa-solid fa-leaf"></i>
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const formLogin = document.getElementById("form-login");
+    const formRegistro = document.getElementById("form-registro");
+
+    // ======================================================
+    // 🔑 LÓGICA DE LOGIN
+    // ======================================================
+    if (formLogin) {
+        formLogin.addEventListener("submit", async (e) => {
+            e.preventDefault(); // Evita que recargue la página de forma nativa
+
+            const correo = document.getElementById("login-correo").value.trim();
+            const contrasena = document.getElementById("login-contrasena").value.trim();
+
+            try {
+                const respuesta = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        correo_electronico: correo,
+                        contrasena: contrasena
+                    })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (respuesta.ok && resultado.status === "success") {
+                    // Guardamos la sesión del usuario en el navegador
+                    localStorage.setItem("usuario_bloom", JSON.stringify(resultado.usuario));
+                    
+                    alert(`👋 ${resultado.message}`);
+                    // Redirección directa al formulario
+                    window.location.href = "/formulario";
+                } else {
+                    alert(`❌ Error: ${resultado.message || "Credenciales incorrectas"}`);
+                }
+
+            } catch (error) {
+                console.error("Error en la petición de login:", error);
+                alert("💥 Error de conexión con el servidor de autenticación.");
+            }
+        });
+    }
+
+    // ======================================================
+    // 👥 LÓGICA DE REGISTRO
+    // ======================================================
+    if (formRegistro) {
+        formRegistro.addEventListener("submit", async (e) => {
+            e.preventDefault(); // Evita el envío nativo del formulario
+
+            const nombre = document.getElementById("reg-nombre").value.trim();
+            const correo = document.getElementById("reg-correo").value.trim();
+            const contrasena = document.getElementById("reg-contrasena").value.trim();
+
+            try {
+                const respuesta = await fetch("/registro", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nombre_completo: nombre,
+                        correo_electronico: correo,
+                        contrasena: contrasena
+                    })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (respuesta.ok && resultado.status === "success") {
+                    alert("✨ ¡Cuenta creada con éxito! Ya puedes iniciar sesión.");
+                    
+                    // Limpia los campos del registro automáticamente
+                    formRegistro.reset();
+                    
+                    // Comportamiento UI: Cambia el foco visual a la pestaña de Login
+                    const loginTab = new bootstrap.Tab(document.querySelector('[data-bs-target="#login"]'));
+                    loginTab.show();
+                } else {
+                    alert(`❌ Error al registrar: ${resultado.message}`);
+                }
+
+            } catch (error) {
+                console.error("Error en la petición de registro:", error);
+                alert("💥 Hubo un problema al intentar procesar el registro.");
+            }
+        });
+    }
+});
+</script>
+
+{% endblock %}

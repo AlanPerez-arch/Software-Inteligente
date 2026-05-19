@@ -1,20 +1,120 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import get_db_connection
+import json
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return '¡Hola desde Flask!'
+# ======================================================
+# VISTAS FRONTEND (Rutas HTML)
+# ======================================================
 
-# 🚀 Ruta de prueba para verificar la conexión a la base de datos desde la Web
+# 🏠 HOME - Renderiza la landing page principal
+@app.route("/")
+def inicio():
+    return render_template("index.html")
+
+# 👤 LOGIN (Vista) - Cambiado a método GET para mostrar el formulario visual
+@app.route("/login", methods=['GET'])
+def principal():
+    return render_template("login.html")
+
+# 📝 FORMULARIO - Vista para registrar las ideas de negocio
+@app.route("/formulario")
+def formulario():
+    return render_template("formulario.html")
+
+# 📊 DASHBOARD - Muestra los resultados generados (Versión Inicial con Mockup)
+@app.route("/dashboard")
+def dashboard():
+    return render_template(
+        "dashboard.html",
+        estado="Generado",
+        fecha_creacion="18 Mayo 2026",
+        resumen_negocio="""
+        Negocio enfocado en la venta de pasteles artesanales
+        personalizados a domicilio, dirigido a clientes que buscan
+        productos únicos y de calidad para celebraciones y eventos.
+        """,
+        propuesta_valor="""
+        Entrega rápida, personalización completa de diseños
+        y sabores, además de atención cercana por redes sociales.
+        """,
+        publico_objetivo="""
+        Jóvenes, familias y personas entre 18 y 40 años
+        que buscan productos personalizados para cumpleaños,
+        reuniones y eventos especiales.
+        """,
+        canales_venta="""
+        Instagram, Facebook Marketplace, WhatsApp Business
+        y entregas locales a domicilio.
+        """,
+        publicaciones_redes="""
+        🎂 ¡Haz tus momentos más dulces!
+        Personalizamos pasteles artesanales para cualquier ocasión.
+        Ordena hoy por WhatsApp y recibe en casa.
+        """,
+        estimacion_costos="""
+        Materia prima: $3,000 MXN
+        Publicidad: $1,000 MXN
+        Empaques y envíos: $1,000 MXN
+        """,
+        posibles_ingresos="""
+        Ventas mensuales estimadas:
+        entre $12,000 y $18,000 MXN
+        dependiendo de la temporada y demanda.
+        """
+    )
+
+# ⏳ HISTORIAL - Vista estática inicial del listado de proyectos
+@app.route("/historial")
+def historial():
+    proyectos = [
+        {
+            "idea": "Pastelería artesanal a domicilio",
+            "contexto": "Ventas locales mediante Instagram y WhatsApp en colonias urbanas.",
+            "estado": "Generado",
+            "fecha": "18 Mayo 2026"
+        },
+        {
+            "idea": "Cafetería temática gamer",
+            "contexto": "Enfocado en estudiantes universitarios y comunidad gaming local.",
+            "estado": "Procesando",
+            "fecha": "17 Mayo 2026"
+        },
+        {
+            "idea": "Tienda de ropa vintage",
+            "contexto": "Venta online enfocada en jóvenes mediante TikTok e Instagram.",
+            "estado": "Generado",
+            "fecha": "15 Mayo 2026"
+        }
+    ]
+    return render_template("historial.html", proyectos=proyectos)
+
+# ⚠️ ERROR PAGE - Vista para fallos de servidor o IA
+@app.route("/error")
+def error():
+    return render_template(
+        "error.html",
+        estado="error",
+        error_mensaje="""
+        Error de conexión con el modelo de IA.
+        La solicitud excedió el tiempo de espera
+        permitido por el servidor.
+        """
+    )
+
+
+# ======================================================
+# API ENDPOINTS (Procesamiento de Datos & JSON)
+# ======================================================
+
+# 🚀 Diagnóstico - Verifica la respuesta del motor de PostgreSQL en la Web
 @app.route('/test-db', methods=['GET'])
 def test_database():
     conn = get_db_connection()
     if conn:
         try:
-            # Creamos un cursor para ejecutar una consulta de prueba
             cursor = conn.cursor()
             cursor.execute('SELECT version();')
             db_version = cursor.fetchone()
@@ -34,75 +134,7 @@ def test_database():
             "error": "❌ No se pudo conectar a la base de datos."
         }), 500
 
-# 📝 Ruta para registrar un nuevo proyecto vinculado a un usuario
-@app.route('/proyectos', methods=['POST'])
-def crear_proyecto():
-    # 1. Recibir los datos enviados en formato JSON desde el frontend
-    datos = request.get_json()
-    
-    # Validar que los campos obligatorios existan (ahora incluye usuario_id)
-    if not datos or 'session_id' not in datos or 'idea_negocio' not in datos or 'usuario_id' not in datos:
-        return jsonify({
-            "status": "error",
-            "message": "Faltan campos obligatorios: 'session_id', 'idea_negocio' y 'usuario_id'."
-        }), 400
-        
-    session_id = datos['session_id']
-    idea_negocio = datos['idea_negocio']
-    usuario_id = datos['usuario_id']
-    contexto_local = datos.get('contexto_local', '')
-        
-    # 2. Conexión a la base de datos e inserción
-    conn = get_db_connection()
-    if conn:
-        try:
-            cursor = conn.cursor()
-            
-            # Query actualizada con la llave foránea usuario_id
-            query = """
-                INSERT INTO proyectos (session_id, idea_negocio, contexto_local, estado, usuario_id) 
-                VALUES (%s, %s, %s, 'pendiente', %s)
-                RETURNING id;
-            """
-            cursor.execute(query, (session_id, idea_negocio, contexto_local, usuario_id))
-            
-            # Obtenemos el ID generado automáticamente por el SERIAL
-            nuevo_id = cursor.fetchone()[0]
-            
-            # Guardamos los cambios de forma definitiva (COMMIT)
-            conn.commit()
-            
-            cursor.close()
-            conn.close()
-
-            return jsonify({
-                "status": "success",
-                "message": "✅ Proyecto creado y vinculado exitosamente!",
-                "proyecto_id": nuevo_id
-            }), 201
-
-        except Exception as e:
-            if conn:
-                conn.rollback()  # Revertir cualquier cambio en caso de error
-            
-            # Capturar error si el usuario_id proporcionado no existe en la tabla usuarios
-            if "foreign key" in str(e).lower() or "llave foránea" in str(e).lower():
-                return jsonify({
-                    "status": "error",
-                    "message": "El 'usuario_id' proporcionado no existe en el sistema."
-                }), 400
-                
-            return jsonify({
-                "status": "error",
-                "message": f"Error al insertar en la base de datos: {str(e)}"
-            }), 500
-    else:
-        return jsonify({
-            "status": "error",
-            "error": "❌ No se pudo conectar a la base de datos."
-        }), 500
-
-# 👤 Ruta para registrar un nuevo usuario en la plataforma
+# 👥 API Registro - Inserta nuevos usuarios desde los formularios del front
 @app.route('/registro', methods=['POST'])
 def registrar_usuario():
     datos = request.get_json()
@@ -117,15 +149,12 @@ def registrar_usuario():
     correo = datos['correo_electronico']
     contrasena = datos['contrasena']
     
-    # Encriptar la contraseña usando pbkdf2:sha256 de forma segura
     password_encriptada = generate_password_hash(contrasena)
     
     conn = get_db_connection()
     if conn:
         try:
             cursor = conn.cursor()
-            
-            # Insertar el nuevo usuario en la base de datos
             query = """
                 INSERT INTO usuarios (nombre_completo, correo_electronico, contrasena_hash)
                 VALUES (%s, %s, %s) RETURNING id;
@@ -146,7 +175,6 @@ def registrar_usuario():
         except Exception as e:
             if conn:
                 conn.rollback()
-            # Validar si el correo ya está registrado por la restricción UNIQUE
             if "unique" in str(e).lower() or "ya existe" in str(e).lower():
                 return jsonify({
                     "status": "error",
@@ -162,7 +190,7 @@ def registrar_usuario():
             "error": "❌ No se pudo conectar a la base de datos."
         }), 500
 
-# 🔑 Ruta para iniciar sesión
+# 🔑 API Login - Valida credenciales e interactúa con el backend
 @app.route('/login', methods=['POST'])
 def login_usuario():
     datos = request.get_json()
@@ -180,8 +208,6 @@ def login_usuario():
     if conn:
         try:
             cursor = conn.cursor()
-            
-            # Buscar al usuario por correo para obtener su hash de contraseña
             query = "SELECT id, nombre_completo, contrasena_hash FROM usuarios WHERE correo_electronico = %s;"
             cursor.execute(query, (correo,))
             usuario = cursor.fetchone()
@@ -191,7 +217,6 @@ def login_usuario():
             
             if usuario:
                 usuario_id, nombre_completo, hash_almacenado = usuario
-                # Validar si la contraseña enviada coincide con el hash guardado
                 if check_password_hash(hash_almacenado, contrasena):
                     return jsonify({
                         "status": "success",
@@ -203,7 +228,6 @@ def login_usuario():
                         }
                     }), 200
             
-            # Mensaje genérico por seguridad (así no revelamos si el correo existe o no)
             return jsonify({
                 "status": "error",
                 "message": "Correo electrónico o contraseña incorrectos."
@@ -220,5 +244,65 @@ def login_usuario():
             "error": "❌ No se pudo conectar a la base de datos."
         }), 500
 
+# 📊 API Proyectos - Crea un proyecto enlazándolo con un usuario_id
+@app.route('/proyectos', methods=['POST'])
+def crear_proyecto():
+    datos = request.get_json()
+    
+    if not datos or 'session_id' not in datos or 'idea_negocio' not in datos or 'usuario_id' not in datos:
+        return jsonify({
+            "status": "error",
+            "message": "Faltan campos obligatorios: 'session_id', 'idea_negocio' y 'usuario_id'."
+        }), 400
+        
+    session_id = datos['session_id']
+    idea_negocio = datos['idea_negocio']
+    usuario_id = datos['usuario_id']
+    contexto_local = datos.get('contexto_local', '')
+        
+    conn = get_db_connection()
+    if conn:
+        try:
+            cursor = conn.cursor()
+            query = """
+                INSERT INTO proyectos (session_id, idea_negocio, contexto_local, estado, usuario_id) 
+                VALUES (%s, %s, %s, 'pendiente', %s)
+                RETURNING id;
+            """
+            cursor.execute(query, (session_id, idea_negocio, contexto_local, usuario_id))
+            nuevo_id = cursor.fetchone()[0]
+            
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            return jsonify({
+                "status": "success",
+                "message": "✅ Proyecto creado y vinculado exitosamente!",
+                "proyecto_id": nuevo_id
+            }), 201
+
+        except Exception as e:
+            if conn:
+                conn.rollback()
+            if "foreign key" in str(e).lower() or "llave foránea" in str(e).lower():
+                return jsonify({
+                    "status": "error",
+                    "message": "El 'usuario_id' proporcionado no existe en el sistema."
+                }), 400
+                
+            return jsonify({
+                "status": "error",
+                "message": f"Error al insertar en la base de datos: {str(e)}"
+            }), 500
+    else:
+        return jsonify({
+            "status": "error",
+            "error": "❌ No se pudo conectar a la base de datos."
+        }), 500
+
+# ======================================================
+# ARRANQUE DEL SERVIDOR
+# ======================================================
 if __name__ == '__main__':
     app.run(debug=True)

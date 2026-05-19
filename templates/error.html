@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}
+Error | EmprendeAI Hub
+{% endblock %}
+
+{% block body %}
+
+<section class="error-page">
+
+    <!-- GLOW -->
+    <div class="error-glow"></div>
+
+    <div class="container">
+
+        <div class="error-container">
+
+            <!-- ICON -->
+            <div class="error-icon">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+            </div>
+
+            <!-- STATUS -->
+            <div class="error-status">
+
+                Estado:
+                <span>{{ estado }}</span>
+
+            </div>
+
+            <!-- TITLE -->
+            <h1 class="error-title">
+
+                Ocurrió un problema
+                al generar el proyecto
+
+            </h1>
+
+            <!-- DESCRIPTION -->
+            <p class="error-description">
+
+                La inteligencia artificial no pudo completar
+                la solicitud correctamente.
+                Esto puede ocurrir por saturación,
+                tiempo de espera o problemas de conexión.
+
+            </p>
+
+            <!-- ERROR BOX -->
+            <div class="error-box">
+
+                <h5>
+
+                    Detalles técnicos
+
+                </h5>
+
+                <p>
+
+                    {{ error_mensaje }}
+
+                </p>
+
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="error-actions">
+
+                <!-- RETRY -->
+                <a href="/dashboard"
+                   class="btn-error-primary">
+
+                    <i class="fa-solid fa-rotate-right"></i>
+
+                    Intentar de nuevo
+
+                </a>
+
+                <!-- NEW IDEA -->
+                <a href="/"
+                   class="btn-error-secondary">
+
+                    <i class="fa-solid fa-lightbulb"></i>
+
+                    Crear otra idea
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
