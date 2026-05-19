@@ -37,8 +37,13 @@ def llamar_ia(sistema, datos_usuario):
 
 # 🏠 HOME - Renderiza la landing page principal
 @app.route("/")
-def inicio():
+def login():
     return render_template("login.html")
+
+@app.route("/principal")
+def inicio():
+    return render_template("principal.html")
+
 
 @app.route("/logout")
 def logout():
@@ -130,22 +135,8 @@ def formulario():
         marketing_res = llamar_ia(prompt_marketing, contexto_usuario)
         finanzas_res = llamar_ia(prompt_finanzas, contexto_usuario)
 
-        usuario_id = session.get('usuario_id') or request.form.get('usuario_id', 1)
-        proyecto_id = guardar_proyecto_con_respuestas(
-            session_id=request.form.get('session_id') or str(uuid.uuid4()),
-            idea_negocio=idea,
-            contexto_local=contexto,
-            usuario_id=usuario_id,
-            plan_negocio={"texto": negocio_res},
-            kit_marketing={"texto": marketing_res},
-            datos_financieros={"texto": finanzas_res},
-            estado='completado'
-        )
-
-        if proyecto_id is None:
-            return jsonify({
-                "error": "No se pudo guardar el proyecto en la base de datos."
-            }), 500
+        # No guardar en la base de datos por ahora — solo devolver las respuestas
+        proyecto_id = None
 
         return jsonify({
             "negocio": negocio_res,
